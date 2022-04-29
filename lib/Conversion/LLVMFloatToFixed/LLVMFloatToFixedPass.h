@@ -472,6 +472,11 @@ struct FloatToFixed : public llvm::ModulePass {
   std::shared_ptr<ValueInfo> valueInfo(llvm::Value *val)
   {
     auto vi = info.find(val);
+    if (vi == info.end()) {
+      LLVM_DEBUG(
+          llvm::dbgs()
+          << "value with no info: " << *val << "\n");
+    }
     assert((vi != info.end()) && "value with no info");
     return vi->getSecond();
   };
