@@ -93,7 +93,8 @@ pe_model_file=
 temporary_dir=$(mktemp -d)
 del_temporary_dir=1
 help=0
-dynamic_training_data=
+dynamic_instrument=0
+dynamic_trace=
 for opt in $raw_opts; do
   case $parse_state in
     0)
@@ -204,8 +205,11 @@ for opt in $raw_opts; do
           printf '%s\n' "$CLANG"
           exit 0
           ;;
-        -dynamic-training-data)
-            parse_state=13
+        -dynamic-instrument)
+            dynamic_instrument=1
+            ;;
+        -dynamic-trace)
+            parse_state=14
             ;;
         -help | -h | -version | -v | --help | --version)
           help=1
@@ -279,8 +283,8 @@ for opt in $raw_opts; do
       float_opts="$float_opts $opt";
       parse_state=0;
       ;;
-    13)
-      dynamic_training_data="$opt";
+    14)
+      dynamic_trace="$opt";
       parse_state=0;
       ;;
   esac;
@@ -334,7 +338,8 @@ Options:
   -debug-taffo          Enable TAFFO-only debug logging during the compilation.
   -temp-dir <dir>       Store various temporary files related to the execution
                         of TAFFO to the specified directory.
-  -dynamic-training-data  Path to the file with the training data for the dynamic tuning mode
+  -dynamic-instrument   Create an instrumented binary for the dynamic tuning mode
+  -dynamic-trace        Path to the file with the trace data for the dynamic tuning mode
 
 Available builtin cost models:
 HELP_END
@@ -382,7 +387,7 @@ fi
 # precompute clang invocation for compiling float version
 build_float="${iscpp} $opts ${optimization} ${float_opts} ${temporary_dir}/${output_basename}.1.taffotmp.ll"
 
-if [ -z "$dynamic_training_data" ]; then
+if [[ $dynamic_instrument -eq 0 ]] && [ -z "$dynamic_trace" ]; then
 #  Static tuning
 ###
 ###  TAFFO initialization
@@ -484,37 +489,30 @@ else
     "${temporary_dir}/${output_basename}.taffoinit.taffotmp.ll" \
     -o "${temporary_dir}/${output_basename}.named.taffotmp.ll" || exit $?
 
-  ${OPT} -load=${TAFFOLIB} -S \
-    --taffo-inject-func-call \
-    "${temporary_dir}/${output_basename}.named.taffotmp.ll" \
-    -o "${temporary_dir}/${output_basename}.instrumented.taffotmp.ll" || exit $?
+  if [[ $dynamic_instrument -ne 0 ]]; then
+    ${OPT} -load=${TAFFOLIB} -S \
+      --taffo-inject-func-call \
+      "${temporary_dir}/${output_basename}.named.taffotmp.ll" \
+      -o "${temporary_dir}/${output_basename}.5.taffotmp.ll" || exit $?
+  elif [ ! -z "$dynamic_trace" ]; then
+    ${OPT} -load=${TAFFOLIB} -S \
+      --taffo-read-trace \
+      -trace_file "$dynamic_trace" \
+      "${temporary_dir}/${output_basename}.named.taffotmp.ll" \
+      -o "${temporary_dir}/${output_basename}.dynamic.taffotmp.ll" || exit $?
 
-  ${iscpp} \
-    "${temporary_dir}/${output_basename}.instrumented.taffotmp.ll" \
-    -o "${temporary_dir}/${output_basename}.instrumented" || exit $?
+    ${OPT} -load=${TAFFOLIB} -S \
+      --taffodta \
+      ${dta_flags} \
+      "${temporary_dir}/${output_basename}.dynamic.taffotmp.ll" \
+      -o "${temporary_dir}/${output_basename}.dynamic_taffodta.taffotmp.ll" || exit $?
 
-  "${temporary_dir}/${output_basename}.instrumented" \
-    "$dynamic_training_data" \
-    /dev/null \
-    > "${temporary_dir}/${output_basename}.instrumented.trace" || exit $?
-
-  ${OPT} -load=${TAFFOLIB} -S \
-    --taffo-read-trace \
-    -trace_file "${temporary_dir}/${output_basename}.instrumented.trace" \
-    "${temporary_dir}/${output_basename}.named.taffotmp.ll" \
-    -o "${temporary_dir}/${output_basename}.dynamic.taffotmp.ll" || exit $?
-
-  ${OPT} -load=${TAFFOLIB} -S \
-    --taffodta \
-    ${dta_flags} \
-    "${temporary_dir}/${output_basename}.dynamic.taffotmp.ll" \
-    -o "${temporary_dir}/${output_basename}.dynamic_taffodta.taffotmp.ll" || exit $?
-
-  ${OPT} -load=${TAFFOLIB} -S \
-    --flttofix --dce --globaldce \
-    ${conversion_flags} \
-    "${temporary_dir}/${output_basename}.dynamic_taffodta.taffotmp.ll" \
-    -o "${temporary_dir}/${output_basename}.5.taffotmp.ll" || exit $?
+    ${OPT} -load=${TAFFOLIB} -S \
+      --flttofix --dce --globaldce \
+      ${conversion_flags} \
+      "${temporary_dir}/${output_basename}.dynamic_taffodta.taffotmp.ll" \
+      -o "${temporary_dir}/${output_basename}.5.taffotmp.ll" || exit $?
+  fi
 fi
 
 ###
