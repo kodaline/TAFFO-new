@@ -114,8 +114,8 @@ bool FloatToFixed::parseMetaData(SmallPtrSetImpl<Value *> *variables, MDInfo *ra
     if (!fpInfo->IEnableConversion)
       return false;
     if (!instr->getType()->isVoidTy()) {
-      assert(!(fullyUnwrapPointerOrArrayType(instr->getType())->isStructTy()) &&
-             "input info / actual type mismatch");
+//      assert(!(fullyUnwrapPointerOrArrayType(instr->getType())->isStructTy()) &&
+//             "input info / actual type mismatch");
       TType *fpt = dyn_cast_or_null<TType>(fpInfo->IType.get());
       if (!fpt) {
         LLVM_DEBUG(dbgs() << "Failed to get Metadata.\n");
