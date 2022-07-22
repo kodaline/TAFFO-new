@@ -651,8 +651,8 @@ struct FloatToFixed : public llvm::ModulePass {
 
   void handleKmpcFork(llvm::CallInst *patchedDirectCall, llvm::Function *indirectFunction);
 
-  llvm::Value *TransformToIntrinsic(llvm::Value *val1, llvm::Value *val2, const FixedPointType &type1, const FixedPointType &type2, llvm::Instruction *instr);
-  llvm::Value *ToIntrinsic(llvm::Value *val1, llvm::Value *val2, const FixedPointType &type1, const FixedPointType &type2, llvm::Instruction *instr);
+  llvm::Value *TransformToIntrinsic(llvm::Value *val1, llvm::Value *val2, const FixedPointType &type1, const FixedPointType &type2, llvm::Instruction *instr, const FixedPointType &result_type);
+  llvm::Value *ToIntrinsic(llvm::Value *val1, llvm::Value *val2, llvm::Instruction *instr, const FixedPointType &result_type);
 };
 
 } // namespace flttofix
