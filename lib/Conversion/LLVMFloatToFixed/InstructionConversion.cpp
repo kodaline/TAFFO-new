@@ -577,29 +577,7 @@ Value *FloatToFixed::convertBinOp(Instruction *instr,
                                   TypeMatchPolicy::RangeOverHintMaxInt);
       if (!val1 || !val2)
         return nullptr;
-      FixedPointType intermtype(
-          fixpt.scalarIsSigned(),
-          intype1.scalarFracBitsAmt() + intype2.scalarFracBitsAmt(),
-          intype1.scalarBitsAmt() + intype2.scalarBitsAmt());
-      Type *dbfxt = intermtype.scalarToLLVMType(instr->getContext());
-      FixedPointType fixoptype(
-          fixpt.scalarIsSigned(), intype1.scalarFracBitsAmt(),
-          intype1.scalarBitsAmt() + intype2.scalarBitsAmt());
-      Value *ext1 = genConvertFixedToFixed(val1, intype1, intermtype, instr);
-      IRBuilder<> builder(instr);
-      Value *ext2 = intype2.scalarIsSigned() ? builder.CreateSExt(val2, dbfxt)
-                                             : builder.CreateZExt(val2, dbfxt);
-      Value *fixop = fixpt.scalarIsSigned() ? builder.CreateSDiv(ext1, ext2)
-                                            : builder.CreateUDiv(ext1, ext2);
-      cpMetaData(ext1, val1);
-      cpMetaData(ext2, val2);
-      cpMetaData(fixop, instr);
-      updateFPTypeMetadata(fixop, fixoptype.scalarIsSigned(),
-                           fixoptype.scalarFracBitsAmt(),
-                           fixoptype.scalarBitsAmt());
-      updateConstTypeMetadata(fixop, 0U, intermtype);
-      updateConstTypeMetadata(fixop, 1U, intype2);
-      return genConvertFixedToFixed(fixop, fixoptype, fixpt, instr);
+      return TransformToDivIntrinsic(val1, val2, intype1, intype2, instr, fixpt);
     } else if (fixpt.isFloatingPoint()) {
       Value *val1 = translateOrMatchOperand(instr->getOperand(0), intype1,
                                             instr, TypeMatchPolicy::ForceHint);
