@@ -150,6 +150,7 @@ bool TaffoInitializer::parseAnnotation(MultiValueMap<Value *, ValueInfo> &variab
   if (startingPoint)
     *startingPoint = parser.startingPoint;
   vi.target = parser.target;
+  vi.bufferID = parser.bufferID;
 
   if (Instruction *toconv = dyn_cast<Instruction>(instr)) {
     variables.push_back(toconv->getOperand(0), vi);
