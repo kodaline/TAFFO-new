@@ -1,0 +1,684 @@
+------ 01 ------
+*** Float Version ***
+kernel time = 16.5256 s
+
+real	0m16,577s
+user	0m5,800s
+sys	0m10,760s
+*** Fix Version ***
+kernel time = 16.5936 s
+
+real	0m16,641s
+user	0m5,824s
+sys	0m10,784s
+### QoS ###
+*** Error: 0.258893%
+### QoS (Distance) ###
+*** Relative error: 0.01993687 %
+*** Absolute error: 0.00007708
+*** Maximum value: 1.54832600
+------ 02 ------
+*** Float Version ***
+kernel time = 17.0918 s
+
+real	0m17,144s
+user	0m5,962s
+sys	0m11,148s
+*** Fix Version ***
+kernel time = 16.6039 s
+
+real	0m16,652s
+user	0m5,706s
+sys	0m10,920s
+### QoS ###
+*** Error: 0.243299%
+### QoS (Distance) ###
+*** Relative error: 0.02544776 %
+*** Absolute error: 0.00010256
+*** Maximum value: 1.55637100
+------ 03 ------
+*** Float Version ***
+kernel time = 17.6582 s
+
+real	0m17,712s
+user	0m6,134s
+sys	0m11,553s
+*** Fix Version ***
+kernel time = 16.9248 s
+
+real	0m16,973s
+user	0m5,751s
+sys	0m11,197s
+### QoS ###
+*** Error: 0.166206%
+### QoS (Distance) ###
+*** Relative error: 0.01894123 %
+*** Absolute error: 0.00007036
+*** Maximum value: 1.41702700
+------ 04 ------
+*** Float Version ***
+kernel time = 17.026 s
+
+real	0m17,077s
+user	0m5,723s
+sys	0m11,334s
+*** Fix Version ***
+kernel time = 17.7209 s
+
+real	0m17,770s
+user	0m6,047s
+sys	0m11,705s
+### QoS ###
+*** Error: 0.244549%
+### QoS (Distance) ###
+*** Relative error: 0.02418876 %
+*** Absolute error: 0.00009500
+*** Maximum value: 1.53417500
+------ 05 ------
+*** Float Version ***
+kernel time = 17.7754 s
+
+real	0m17,827s
+user	0m6,599s
+sys	0m11,194s
+*** Fix Version ***
+kernel time = 16.6701 s
+
+real	0m16,717s
+user	0m6,152s
+sys	0m10,539s
+### QoS ###
+*** Error: 0.325353%
+### QoS (Distance) ###
+*** Relative error: 0.01495544 %
+*** Absolute error: 0.00008655
+*** Maximum value: 1.55637100
+------ 06 ------
+*** Float Version ***
+kernel time = 19.782 s
+
+real	0m19,836s
+user	0m5,802s
+sys	0m14,002s
+*** Fix Version ***
+kernel time = 19.5016 s
+
+real	0m19,550s
+user	0m5,800s
+sys	0m13,731s
+### QoS ###
+*** Error: 0.337864%
+### QoS (Distance) ###
+*** Relative error: 0.02586726 %
+*** Absolute error: 0.00009617
+*** Maximum value: 1.55637100
+------ 07 ------
+*** Float Version ***
+kernel time = 19.5835 s
+
+real	0m19,634s
+user	0m5,895s
+sys	0m13,714s
+*** Fix Version ***
+kernel time = 19.4451 s
+
+real	0m19,493s
+user	0m5,851s
+sys	0m13,607s
+### QoS ###
+*** Error: 0.000000%
+### QoS (Distance) ###
+*** Relative error: 0.02263604 %
+*** Absolute error: 0.00009578
+*** Maximum value: 1.55637100
+------ 08 ------
+*** Float Version ***
+kernel time = 19.8515 s
+
+real	0m19,903s
+user	0m5,945s
+sys	0m13,934s
+*** Fix Version ***
+kernel time = 19.1392 s
+
+real	0m19,187s
+user	0m5,572s
+sys	0m13,581s
+### QoS ###
+*** Error: 0.000000%
+### QoS (Distance) ###
+*** Relative error: 0.02189855 %
+*** Absolute error: 0.00009303
+*** Maximum value: 1.55637100
+------ 09 ------
+*** Float Version ***
+kernel time = 19.6456 s
+
+real	0m19,700s
+user	0m5,780s
+sys	0m13,916s
+*** Fix Version ***
+kernel time = 19.4663 s
+
+real	0m19,514s
+user	0m5,880s
+sys	0m13,616s
+### QoS ###
+*** Error: 0.301909%
+### QoS (Distance) ###
+*** Relative error: 0.02252593 %
+*** Absolute error: 0.00009002
+*** Maximum value: 1.55637100
+------ 10 ------
+*** Float Version ***
+kernel time = 19.2504 s
+
+real	0m19,302s
+user	0m5,712s
+sys	0m13,564s
+*** Fix Version ***
+kernel time = 19.5283 s
+
+real	0m19,576s
+user	0m5,843s
+sys	0m13,713s
+### QoS ###
+*** Error: 0.226926%
+### QoS (Distance) ###
+*** Relative error: 0.02254673 %
+*** Absolute error: 0.00009687
+*** Maximum value: 1.55637100
+------ 11 ------
+*** Float Version ***
+kernel time = 19.6062 s
+
+real	0m19,659s
+user	0m5,870s
+sys	0m13,752s
+*** Fix Version ***
+kernel time = 19.1926 s
+
+real	0m19,239s
+user	0m5,643s
+sys	0m13,579s
+### QoS ###
+*** Error: 0.289636%
+### QoS (Distance) ###
+*** Relative error: 0.02094350 %
+*** Absolute error: 0.00008223
+*** Maximum value: 1.55637100
+------ 12 ------
+*** Float Version ***
+kernel time = 19.2588 s
+
+real	0m19,311s
+user	0m5,976s
+sys	0m13,308s
+*** Fix Version ***
+kernel time = 19.7203 s
+
+real	0m19,767s
+user	0m5,817s
+sys	0m13,918s
+### QoS ###
+*** Error: 0.355625%
+### QoS (Distance) ###
+*** Relative error: 0.01843394 %
+*** Absolute error: 0.00009023
+*** Maximum value: 1.55637100
+------ 13 ------
+*** Float Version ***
+kernel time = 20.2776 s
+
+real	0m20,332s
+user	0m6,267s
+sys	0m14,030s
+*** Fix Version ***
+kernel time = 19.6815 s
+
+real	0m19,730s
+user	0m6,066s
+sys	0m13,632s
+### QoS ###
+*** Error: 0.294993%
+### QoS (Distance) ###
+*** Relative error: 0.02083731 %
+*** Absolute error: 0.00008327
+*** Maximum value: 1.54952900
+------ 14 ------
+*** Float Version ***
+kernel time = 19.4077 s
+
+real	0m19,459s
+user	0m5,995s
+sys	0m13,438s
+*** Fix Version ***
+kernel time = 19.9305 s
+
+real	0m19,979s
+user	0m6,034s
+sys	0m13,912s
+### QoS ###
+*** Error: 0.000000%
+### QoS (Distance) ###
+*** Relative error: 0.02476173 %
+*** Absolute error: 0.00010297
+*** Maximum value: 1.42190600
+------ 15 ------
+*** Float Version ***
+kernel time = 19.4672 s
+
+real	0m19,517s
+user	0m5,826s
+sys	0m13,648s
+*** Fix Version ***
+kernel time = 19.6335 s
+
+real	0m19,679s
+user	0m5,804s
+sys	0m13,843s
+### QoS ###
+*** Error: 0.289292%
+### QoS (Distance) ###
+*** Relative error: 0.01834478 %
+*** Absolute error: 0.00009613
+*** Maximum value: 1.55637100
+------ 16 ------
+*** Float Version ***
+kernel time = 19.8264 s
+
+real	0m19,876s
+user	0m6,115s
+sys	0m13,729s
+*** Fix Version ***
+kernel time = 19.5649 s
+
+real	0m19,612s
+user	0m6,011s
+sys	0m13,583s
+### QoS ###
+*** Error: 0.310559%
+### QoS (Distance) ###
+*** Relative error: 0.01682600 %
+*** Absolute error: 0.00008925
+*** Maximum value: 1.52461300
+------ 17 ------
+*** Float Version ***
+kernel time = 19.2447 s
+
+real	0m19,295s
+user	0m5,796s
+sys	0m13,475s
+*** Fix Version ***
+kernel time = 20.6049 s
+
+real	0m20,653s
+user	0m6,673s
+sys	0m13,954s
+### QoS ###
+*** Error: 0.362274%
+### QoS (Distance) ###
+*** Relative error: 0.02271651 %
+*** Absolute error: 0.00009722
+*** Maximum value: 1.55637100
+------ 18 ------
+*** Float Version ***
+kernel time = 19.5717 s
+
+real	0m19,624s
+user	0m6,168s
+sys	0m13,428s
+*** Fix Version ***
+kernel time = 19.6854 s
+
+real	0m19,733s
+user	0m6,213s
+sys	0m13,502s
+### QoS ###
+*** Error: 0.267795%
+### QoS (Distance) ###
+*** Relative error: 0.02298156 %
+*** Absolute error: 0.00009445
+*** Maximum value: 1.55637100
+------ 19 ------
+*** Float Version ***
+kernel time = 19.7749 s
+
+real	0m19,826s
+user	0m5,953s
+sys	0m13,847s
+*** Fix Version ***
+kernel time = 20.1197 s
+
+real	0m20,167s
+user	0m6,031s
+sys	0m14,115s
+### QoS ###
+*** Error: 0.249515%
+### QoS (Distance) ###
+*** Relative error: 0.02699452 %
+*** Absolute error: 0.00010617
+*** Maximum value: 1.55637100
+------ 20 ------
+*** Float Version ***
+kernel time = 23.5028 s
+
+real	0m23,560s
+user	0m7,753s
+sys	0m15,782s
+*** Fix Version ***
+kernel time = 21.7466 s
+
+real	0m21,796s
+user	0m7,017s
+sys	0m14,745s
+### QoS ###
+*** Error: 0.252794%
+### QoS (Distance) ###
+*** Relative error: 0.02194435 %
+*** Absolute error: 0.00009494
+*** Maximum value: 1.44969000
+------ 21 ------
+*** Float Version ***
+kernel time = 20.1732 s
+
+real	0m20,227s
+user	0m6,068s
+sys	0m14,133s
+*** Fix Version ***
+kernel time = 19.9248 s
+
+real	0m19,972s
+user	0m6,081s
+sys	0m13,858s
+### QoS ###
+*** Error: 0.319384%
+### QoS (Distance) ###
+*** Relative error: 0.02375079 %
+*** Absolute error: 0.00009292
+*** Maximum value: 1.41695000
+------ 22 ------
+*** Float Version ***
+kernel time = 21.2021 s
+
+real	0m21,254s
+user	0m6,534s
+sys	0m14,712s
+*** Fix Version ***
+kernel time = 19.8413 s
+
+real	0m19,896s
+user	0m5,930s
+sys	0m13,937s
+### QoS ###
+*** Error: 0.323586%
+### QoS (Distance) ###
+*** Relative error: 0.02230058 %
+*** Absolute error: 0.00008807
+*** Maximum value: 1.55637100
+------ 23 ------
+*** Float Version ***
+kernel time = 19.51 s
+
+real	0m19,560s
+user	0m6,086s
+sys	0m13,448s
+*** Fix Version ***
+kernel time = 21.0023 s
+
+real	0m21,049s
+user	0m6,215s
+sys	0m14,818s
+### QoS ###
+*** Error: 0.405903%
+### QoS (Distance) ###
+*** Relative error: 0.02317675 %
+*** Absolute error: 0.00010422
+*** Maximum value: 1.55637100
+------ 24 ------
+*** Float Version ***
+kernel time = 20.1599 s
+
+real	0m20,209s
+user	0m6,000s
+sys	0m14,176s
+*** Fix Version ***
+kernel time = 20.8745 s
+
+real	0m20,921s
+user	0m6,279s
+sys	0m14,609s
+### QoS ###
+*** Error: 0.000000%
+### QoS (Distance) ###
+*** Relative error: 0.02313044 %
+*** Absolute error: 0.00010530
+*** Maximum value: 1.55637100
+------ 25 ------
+*** Float Version ***
+kernel time = 19.6806 s
+
+real	0m19,734s
+user	0m6,134s
+sys	0m13,576s
+*** Fix Version ***
+kernel time = 19.2837 s
+
+real	0m19,330s
+user	0m5,636s
+sys	0m13,669s
+### QoS ###
+*** Error: 0.298812%
+### QoS (Distance) ###
+*** Relative error: 0.02193560 %
+*** Absolute error: 0.00008933
+*** Maximum value: 1.55637100
+------ 26 ------
+*** Float Version ***
+kernel time = 20.3823 s
+
+real	0m20,432s
+user	0m6,474s
+sys	0m13,953s
+*** Fix Version ***
+kernel time = 19.7099 s
+
+real	0m19,756s
+user	0m5,924s
+sys	0m13,799s
+### QoS ###
+*** Error: 0.319523%
+### QoS (Distance) ###
+*** Relative error: 0.02277839 %
+*** Absolute error: 0.00010594
+*** Maximum value: 1.55637100
+------ 27 ------
+*** Float Version ***
+kernel time = 20.5291 s
+
+real	0m20,581s
+user	0m6,458s
+sys	0m14,089s
+*** Fix Version ***
+kernel time = 19.7902 s
+
+real	0m19,838s
+user	0m5,906s
+sys	0m13,908s
+### QoS ###
+*** Error: 0.326878%
+### QoS (Distance) ###
+*** Relative error: 0.02267367 %
+*** Absolute error: 0.00009302
+*** Maximum value: 1.55637100
+------ 28 ------
+*** Float Version ***
+kernel time = 19.6252 s
+
+real	0m19,676s
+user	0m6,121s
+sys	0m13,534s
+*** Fix Version ***
+kernel time = 19.4081 s
+
+real	0m19,455s
+user	0m5,827s
+sys	0m13,602s
+### QoS ###
+*** Error: 0.352676%
+### QoS (Distance) ###
+*** Relative error: 0.02154777 %
+*** Absolute error: 0.00009256
+*** Maximum value: 1.55637100
+------ 30 ------
+*** Float Version ***
+kernel time = 20.178 s
+
+real	0m20,228s
+user	0m6,460s
+sys	0m13,735s
+*** Fix Version ***
+kernel time = 20.0692 s
+
+real	0m20,115s
+user	0m6,242s
+sys	0m13,855s
+### QoS ###
+*** Error: 0.304276%
+### QoS (Distance) ###
+*** Relative error: 0.02253987 %
+*** Absolute error: 0.00009000
+*** Maximum value: 1.55637100
+------ 31 ------
+*** Float Version ***
+kernel time = 20.0603 s
+
+real	0m20,111s
+user	0m6,316s
+sys	0m13,769s
+*** Fix Version ***
+kernel time = 20.8539 s
+
+real	0m20,903s
+user	0m6,504s
+sys	0m14,367s
+### QoS ###
+*** Error: 0.276847%
+### QoS (Distance) ###
+*** Relative error: 0.02437605 %
+*** Absolute error: 0.00010762
+*** Maximum value: 1.55637100
+------ 32 ------
+*** Float Version ***
+kernel time = 20.6836 s
+
+real	0m20,736s
+user	0m6,271s
+sys	0m14,439s
+*** Fix Version ***
+kernel time = 19.4074 s
+
+real	0m19,455s
+user	0m5,780s
+sys	0m13,648s
+### QoS ###
+*** Error: 0.000000%
+### QoS (Distance) ###
+*** Relative error: 0.02356754 %
+*** Absolute error: 0.00009768
+*** Maximum value: 1.55637100
+------ 33 ------
+*** Float Version ***
+kernel time = 20.2558 s
+
+real	0m20,303s
+user	0m6,235s
+sys	0m14,034s
+*** Fix Version ***
+kernel time = 20.1535 s
+
+real	0m20,198s
+user	0m6,232s
+sys	0m13,932s
+### QoS ###
+*** Error: 0.267670%
+### QoS (Distance) ###
+*** Relative error: 0.01693328 %
+*** Absolute error: 0.00009851
+*** Maximum value: 1.55637100
+------ 34 ------
+*** Float Version ***
+kernel time = 19.6836 s
+
+real	0m19,734s
+user	0m5,985s
+sys	0m13,717s
+*** Fix Version ***
+kernel time = 19.495 s
+
+real	0m19,543s
+user	0m6,015s
+sys	0m13,494s
+### QoS ###
+*** Error: 0.366879%
+### QoS (Distance) ###
+*** Relative error: 0.02322831 %
+*** Absolute error: 0.00008651
+*** Maximum value: 1.55637100
+------ 35 ------
+*** Float Version ***
+kernel time = 20.4464 s
+
+real	0m20,496s
+user	0m6,439s
+sys	0m14,031s
+*** Fix Version ***
+kernel time = 19.589 s
+
+real	0m19,634s
+user	0m5,959s
+sys	0m13,673s
+### QoS ###
+*** Error: 0.329783%
+### QoS (Distance) ###
+*** Relative error: 0.02951481 %
+*** Absolute error: 0.00010757
+*** Maximum value: 1.53766200
+------ 36 ------
+*** Float Version ***
+kernel time = 17.2323 s
+
+real	0m17,284s
+user	0m5,733s
+sys	0m11,534s
+*** Fix Version ***
+kernel time = 17.3601 s
+
+real	0m17,408s
+user	0m5,938s
+sys	0m11,453s
+### QoS ###
+*** Error: 0.302196%
+### QoS (Distance) ###
+*** Relative error: 0.02148354 %
+*** Absolute error: 0.00009546
+*** Maximum value: 1.55637100
+------ 37 ------
+*** Float Version ***
+kernel time = 16.9443 s
+
+real	0m16,996s
+user	0m5,904s
+sys	0m11,065s
+*** Fix Version ***
+kernel time = 17.61 s
+
+real	0m17,659s
+user	0m6,099s
+sys	0m11,558s
+### QoS ###
+*** Error: 0.272067%
+### QoS (Distance) ###
+*** Relative error: 0.02281461 %
+*** Absolute error: 0.00009014
+*** Maximum value: 1.55637100
