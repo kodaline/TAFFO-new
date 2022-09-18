@@ -69,7 +69,6 @@ int main(int argc, char* argv[])
 	for(i = 0 ; i < (n * 6 * 3); i += 6 * 3)
 	{
 
-		float __attribute((annotate("target('res') scalar()"))) res[2];
 		int output = -1;
 
 #pragma parrot(input, "jmeint", [18]dataIn)
@@ -77,7 +76,7 @@ int main(int argc, char* argv[])
 		x = tri_tri_intersect(
 				xyz + i + 0 * 3, xyz + i + 1 * 3, xyz + i + 2 * 3,
 				xyz + i + 3 * 3, xyz + i + 4 * 3, xyz + i + 5 * 3,
-				res, &output);
+				&output);
 
 #pragma parrot(output, "jmeint", [2]<0.2; 0.8>dataOut)
 
@@ -104,4 +103,14 @@ int main(int argc, char* argv[])
 	xyz = NULL ;
 
 	return 0 ;
+}
+
+extern "C"
+fptype* newmain(inputDataStruct* &inputData){
+
+	x = tri_tri_intersect(
+	xyz + i + 0 * 3, xyz + i + 1 * 3, xyz + i + 2 * 3,
+	xyz + i + 3 * 3, xyz + i + 4 * 3, xyz + i + 5 * 3,
+	&output);
+
 }

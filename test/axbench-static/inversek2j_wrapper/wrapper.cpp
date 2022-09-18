@@ -36,7 +36,7 @@ vc::version_ptr_t dynamicCompile() {
   const vc::opt_list_t opt_list = {
     vc::make_option("-O0"),
     vc::make_option("-g3"),
-    vc::make_option("-I/home/vagrant/TAFFO/test/axbench-static/common/src"),
+    vc::make_option("-I/home/vagrant/TAFFO-new/test/axbench-static/common/src"),
     vc::make_option("-I" + kernel_dir),
     vc::make_option("-D_MIN_THETA1_RANGE="+std::to_string(minTheta1)),
     vc::make_option("-D_MAX_THETA1_RANGE="+std::to_string(maxTheta1)),
@@ -50,27 +50,27 @@ vc::version_ptr_t dynamicCompile() {
   };
 
   const vc::opt_list_t opt_options_list = {
-    vc::make_option("-load=/usr/local/lib/TaffoInitializer.so"),
-    vc::make_option("-taffoinit"),
-    vc::make_option("-load=/usr/local/lib/TaffoVRA.so"),
-    vc::make_option("-taffoVRA"),
-    vc::make_option("-load=/usr/local/lib/TaffoDTA.so"),
-    vc::make_option("-taffodta"),
-    vc::make_option("-load=/usr/local/lib/LLVMErrorPropagator.so"),
+    //vc::make_option("-load=/usr/local/lib/TaffoInitializer.so"),
+    //vc::make_option("-taffoinit"),
+    //vc::make_option("-load=/usr/local/lib/TaffoVRA.so"),
+    //vc::make_option("-taffoVRA"),
+    //vc::make_option("-load=/usr/local/lib/TaffoDTA.so"),
+    //vc::make_option("-taffodta"),
+    //vc::make_option("-load=/usr/local/lib/LLVMErrorPropagator.so"),
+    vc::make_option("-load=/usr/local/lib/Taffo.so"),
     vc::make_option("-errorprop"),
-    vc::make_option("-load=/usr/local/lib/LLVMFloatToFixed.so"),
     vc::make_option("-flttofix"),
   };
   vc::vc_utils_init();
   vc::Version::Builder builder;
   vc::compiler_ptr_t clang = vc::make_compiler<vc::SystemCompilerOptimizer>(
-                                          "llvm-project/clang",
-                                          "clang",
+                                          "TAFFO",
+                                          "taffo",
                                           "opt",
                                           ".",
                                           "./test.log",
                                           "/usr/local/bin",
-                                          "/usr/local/llvm-8/bin"
+                                          "/usr/local/bin"
                                         );
 
   builder._compiler = clang;
@@ -110,7 +110,7 @@ int main(int argc, char **argv){
    */
   int n;
   std::string inputFilename	= argv[1];
-  std::string outputFilename 	= argv[2];
+  std::string outputFilename = argv[2];
   
   //prepare the output file for writting the theta values
   std::ofstream outputFileHandler;
@@ -119,7 +119,7 @@ int main(int argc, char **argv){
   //prepare the input file for reading the theta data
   std::ifstream inputFileHandler (inputFilename, std::ifstream::in);
   
-  // first line defins the number of enteries
+  // first line define the number of enteries
   inputFileHandler >> n;
   l1 = atof(argv[3]);
   l2 = atof(argv[4]);

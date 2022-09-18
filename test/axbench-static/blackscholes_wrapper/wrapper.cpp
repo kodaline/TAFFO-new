@@ -57,7 +57,7 @@ vc::version_ptr_t dynamicCompile() {
   const vc::opt_list_t opt_list = {
     vc::make_option("-O0"),
     vc::make_option("-g3"),
-    vc::make_option("-I/home/vagrant/TAFFO/test/axbench-static/common/src"),
+    vc::make_option("-I/home/vagrant/TAFFO-new/test/axbench-static/common/src"),
     vc::make_option("-D_MIN_SPTPRICE_RANGE="+std::to_string(minSptprice)),
     vc::make_option("-D_MAX_SPTPRICE_RANGE="+std::to_string(maxSptprice)),
     vc::make_option("-D_MIN_STRIKE_RANGE="+std::to_string(minStrike)),
@@ -75,34 +75,36 @@ vc::version_ptr_t dynamicCompile() {
   };
 
   const vc::opt_list_t opt_options_list = {
-    vc::make_option("-load=/usr/local/lib/TaffoInitializer.so"),
-    vc::make_option("-taffoinit"),
-    vc::make_option("-load=/usr/local/lib/TaffoVRA.so"),
-    vc::make_option("-taffoVRA"),
-    vc::make_option("-load=/usr/local/lib/TaffoDTA.so"),
-    vc::make_option("-taffodta"),
-    vc::make_option("-load=/usr/local/lib/LLVMErrorPropagator.so"),
-    vc::make_option("-errorprop"),
-    vc::make_option("-load=/usr/local/lib/LLVMFloatToFixed.so"),
+  //  vc::make_option("-load=/usr/local/lib/TaffoInitializer.so"),
+  //  vc::make_option("-taffoinit"),
+  //  vc::make_option("-load=/usr/local/lib/TaffoVRA.so"),
+  //  vc::make_option("-taffoVRA"),
+  //  vc::make_option("-load=/usr/local/lib/TaffoDTA.so"),
+  //  vc::make_option("-taffodta"),
+  //  vc::make_option("-load=/usr/local/lib/LLVMErrorPropagator.so"),
+  //  vc::make_option("-errorprop"),
+  //  vc::make_option("-load=/usr/local/lib/LLVMFloatToFixed.so"),
+  //  vc::make_option("-flttofix"),
+    vc::make_option("-load=/usr/local/lib/Taffo.so"),
     vc::make_option("-flttofix"),
   };
   vc::vc_utils_init();
   vc::Version::Builder builder;
   vc::compiler_ptr_t clang = vc::make_compiler<vc::SystemCompilerOptimizer>(
-                                          "llvm-project/clang",
-                                          "clang",
+                                          "TAFFO",
+                                          "taffo",
                                           "opt",
                                           ".",
                                           "./test.log",
                                           "/usr/local/bin",
-                                          "/usr/local/llvm-8/bin"
+                                          "/usr/local/bin"
                                         );
 
   builder._compiler = clang;
   builder._fileName_src.push_back(kernel_file);
   builder._functionName.push_back(functionName);
   builder._optionList = opt_list;
-  builder.optOptions(opt_options_list);
+  //builder.optOptions(opt_options_list);
   
   std::cerr << "compiling" << std::endl;
   vc::version_ptr_t version =  builder.build();
@@ -116,11 +118,13 @@ vc::version_ptr_t dynamicCompile() {
   bool ok_compile = true;
   if (clang->hasIRSupport()) {
           //version->prepareIR();
-          ok_compile = version->compile();
           std::cerr << "clang has IRSupport" << std::endl;
   }
-
-  if (!ok_compile) {std::cerr << "compilation failed" << std::endl;}
+  ok_compile = version->compile();
+  if (!ok_compile) {
+      std::cerr << "compilation failed" << std::endl;
+	  exit(0);
+  }
 
   return version;
 

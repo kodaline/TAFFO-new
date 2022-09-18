@@ -35,7 +35,7 @@ vc::version_ptr_t dynamicCompile() {
   const vc::opt_list_t opt_list = {
     vc::make_option("-O0"),
     vc::make_option("-g3"),
-    vc::make_option("-I/home/vagrant/TAFFO/test/axbench-static/common/src"),
+    vc::make_option("-I/home/vagrant/TAFFO-new/test/axbench-static/common/src"),
     vc::make_option("-I"+std::string(PATH_TO_KERNEL)),
     vc::make_option("-D_MIN_ANNOTATION_RANGE_N="+std::to_string(minAnnotationRangeN)),
     vc::make_option("-D_MAX_ANNOTATION_RANGE_N="+std::to_string(maxAnnotationRangeN)),
@@ -44,28 +44,31 @@ vc::version_ptr_t dynamicCompile() {
   };
 
   const vc::opt_list_t opt_options_list = {
-    vc::make_option("-load=/usr/local/lib/TaffoInitializer.so"),
-    vc::make_option("-taffoinit"),
-    vc::make_option("-load=/usr/local/lib/TaffoVRA.so"),
-    vc::make_option("-taffoVRA"),
-    vc::make_option("-load=/usr/local/lib/TaffoDTA.so"),
-    vc::make_option("-taffodta"),
-    vc::make_option("-load=/usr/local/lib/LLVMErrorPropagator.so"),
-    vc::make_option("-errorprop"),
-    vc::make_option("-load=/usr/local/lib/LLVMFloatToFixed.so"),
+  //  vc::make_option("-load=/usr/local/lib/TaffoInitializer.so"),
+  //  vc::make_option("-taffoinit"),
+  //  vc::make_option("-load=/usr/local/lib/TaffoVRA.so"),
+  //  vc::make_option("-taffoVRA"),
+  //  vc::make_option("-load=/usr/local/lib/TaffoDTA.so"),
+  //  vc::make_option("-taffodta"),
+  //  vc::make_option("-load=/usr/local/lib/LLVMErrorPropagator.so"),
+  //  vc::make_option("-errorprop"),
+  //  vc::make_option("-load=/usr/local/lib/LLVMFloatToFixed.so"),
+	vc::make_option("-load=/usr/local/lib/Taffo.so"),
     vc::make_option("-flttofix"),
+    vc::make_option("-errorprop"),
   };
   vc::vc_utils_init();
   vc::Version::Builder builder;
   vc::compiler_ptr_t clang = vc::make_compiler<vc::SystemCompilerOptimizer>(
-                                          "llvm-project/clang",
-                                          "clang",
+                                          "TAFFO",
+                                          "taffo",
                                           "opt",
                                           ".",
                                           "./test.log",
                                           "/usr/local/bin",
-                                          "/usr/local/llvm-8/bin"
+                                          "/usr/local/bin"
                                         );
+
 
   builder._compiler = clang;
   builder._fileName_src.push_back(kernel_file);

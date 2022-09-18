@@ -231,7 +231,7 @@ int coplanar_tri_tri(float N[3],
 
 int tri_tri_intersect(float __attribute((annotate("scalar()"))) V0[3], float __attribute((annotate("scalar()"))) V1[3], float __attribute((annotate("scalar()"))) V2[3],
                       float __attribute((annotate("scalar()"))) U0[3], float __attribute((annotate("scalar()"))) U1[3], float __attribute((annotate("scalar()"))) U2[3],
-		      float __attribute((annotate("scalar()"))) *res, int *output)
+		      int *output)
 {
   #pragma clang attribute push( __attribute((annotate("scalar()"))) , apply_to = variable)
   float E1[3],E2[3];

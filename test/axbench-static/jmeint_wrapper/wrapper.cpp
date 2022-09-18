@@ -50,12 +50,12 @@ typedef fptype* (*kernel_t)(blob* &b);
 
 vc::version_ptr_t dynamicCompile() {                                             
   const std::string kernel_dir = PATH_TO_KERNEL;
-  const std::string kernel_file = kernel_dir + "blackscholes.cpp";
+  const std::string kernel_file = kernel_dir + "jmeint.cpp";
   const std::string functionName = "newmain";                                                            
   const vc::opt_list_t opt_list = {
     vc::make_option("-O0"),
     vc::make_option("-g3"),
-    vc::make_option("-I/home/vagrant/TAFFO/test/axbench-static/common/src"),
+    vc::make_option("-I/home/vagrant/TAFFO-new/test/axbench-static/common/src"),
     vc::make_option("-D_MIN_XYZ_RANGE="+std::to_string(minXyz)),
     vc::make_option("-D_MAX_XYZ_RANGE="+std::to_string(maxXyz)),
     vc::make_option("-D_MIN_A_RANGE="+std::to_string(minA)),
@@ -65,27 +65,28 @@ vc::version_ptr_t dynamicCompile() {
   };
 
   const vc::opt_list_t opt_options_list = {
-    vc::make_option("-load=/usr/local/lib/TaffoInitializer.so"),
-    vc::make_option("-taffoinit"),
-    vc::make_option("-load=/usr/local/lib/TaffoVRA.so"),
-    vc::make_option("-taffoVRA"),
-    vc::make_option("-load=/usr/local/lib/TaffoDTA.so"),
-    vc::make_option("-taffodta"),
-    vc::make_option("-load=/usr/local/lib/LLVMErrorPropagator.so"),
-    vc::make_option("-errorprop"),
-    vc::make_option("-load=/usr/local/lib/LLVMFloatToFixed.so"),
-    vc::make_option("-flttofix"),
+    // vc::make_option("-load=/usr/local/lib/TaffoInitializer.so"),
+    // vc::make_option("-taffoinit"),
+    // vc::make_option("-load=/usr/local/lib/TaffoVRA.so"),
+    // vc::make_option("-taffoVRA"),
+    // vc::make_option("-load=/usr/local/lib/TaffoDTA.so"),
+    // vc::make_option("-taffodta"),
+    // vc::make_option("-load=/usr/local/lib/LLVMErrorPropagator.so"),
+    // vc::make_option("-errorprop"),
+    // vc::make_option("-load=/usr/local/lib/LLVMFloatToFixed.so"),
+	 vc::make_option("-load=/usr/local/lib/Taffo.so"),
+     vc::make_option("-flttofix"),
   };
   vc::vc_utils_init();
   vc::Version::Builder builder;
   vc::compiler_ptr_t clang = vc::make_compiler<vc::SystemCompilerOptimizer>(
-                                          "llvm-project/clang",
-                                          "clang",
+                                          "TAFFO",
+                                          "taffo",
                                           "opt",
                                           ".",
                                           "./test.log",
                                           "/usr/local/bin",
-                                          "/usr/local/llvm-8/bin"
+                                          "/usr/local/bin"
                                         );
 
   builder._compiler = clang;
@@ -164,33 +165,7 @@ int main(int argc, char **argv){
   maxXyz = maxA;
 
   int totalCount = 0;
-	int outputAggreg[6] = {0};
-
- 	for(i = 0 ; i < (n * 6 * 3); i += 6 * 3)
-	{
-
-		float __attribute((annotate("target('res') scalar()"))) res[2];
-		int output = -1;
-
-#pragma parrot(input, "jmeint", [18]dataIn)
-
-		float* V0 = xyz + i + 0 * 3;
-        float* V1 = xyz + i + 1 * 3;
-        float* V2 = xyz + i + 2 * 3;
-		float* U0 = xyz + i + 3 * 3;
-        float* U1 = xyz + i + 4 * 3;
-        float* U2 = xyz + i + 5 * 3;
-        
-        float E1[3],E2[3];
-        float N1[3],N2[3],d1,d2;
-        SUB(E1,V1,V0);
-        SUB(E2,V2,V0);
-        CROSS(N1,E1,E2);
-        d1=-DOT(N1,V0);
-   
-
-  std::cerr << "...Done" << std::endl;
-
+  int outputAggreg[6] = {0};
   /*
    * DYNAMIC COMPILATION
    */
@@ -202,6 +177,23 @@ int main(int argc, char **argv){
     std::cerr << "Error while processing item " << std::endl;
     exit(0);
   }
+  std::cerr << "...Done" << std::endl;
+
+
+ 	for(i = 0 ; i < (n * 6 * 3); i += 6 * 3)
+	{
+
+		int output = -1;
+
+#pragma parrot(input, "jmeint", [18]dataIn)
+
+		float* V0 = xyz + i + 0 * 3;
+        float* V1 = xyz + i + 1 * 3;
+        float* V2 = xyz + i + 2 * 3;
+		float* U0 = xyz + i + 3 * 3;
+        float* U1 = xyz + i + 4 * 3;
+        float* U2 = xyz + i + 5 * 3; 
+		
   std::cerr << "...Done" << std::endl;
 
   /*
@@ -219,6 +211,10 @@ int main(int argc, char **argv){
   b->otime = otime;
 
   prices = f(b);
+//		x = tri_tri_intersect(
+//				xyz + i + 0 * 3, xyz + i + 1 * 3, xyz + i + 2 * 3,
+//				xyz + i + 3 * 3, xyz + i + 4 * 3, xyz + i + 5 * 3,
+//				res, &output);
   std::cerr << "...Done" << std::endl;
 
   /*
