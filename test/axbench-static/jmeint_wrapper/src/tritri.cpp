@@ -346,8 +346,6 @@ int tri_tri_intersect(float __attribute((annotate("scalar()"))) V0[3], float __a
   SORT(isect1[0],isect1[1]);
   SORT(isect2[0],isect2[1]);
 
-  res[0] = isect1[0];
-  res[1] = isect1[1];
   float __attribute((annotate("errtarget('delta_isect_1') scalar()"))) delta_isect_1 = isect1[1]-isect2[0];
   float __attribute((annotate("errtarget('delta_isect_2') scalar()"))) delta_isect_2 = isect2[1]-isect1[0];
   PRINT_INSTR("delta_isect_1=%a delta_isect_2=%a\n", delta_isect_1, delta_isect_2);

@@ -24,12 +24,13 @@ typedef struct OptionData_ {
 } OptionData;
 
 typedef struct blob_ {
-    fptype *sptprice;
-    fptype *strike;
-    fptype *volatility;
-    fptype *otime;
-    fptype *rate;
-    int * otype;
+    fptype *V0;
+    fptype *V1;
+    fptype *V2;
+    fptype *U0;
+    fptype *U1;
+    fptype *U2;
+    int * output;
 } blob;
 
 #define MIN_SVALUE 100000.0
@@ -46,7 +47,7 @@ fptype *s;      // spot price  // TEMPORARY: USED ONLY BY PARSER
 fptype *stk;    // strike price // TEMPORARY: USED ONLY BY PARSER
 fptype *prices;
 int numOptions;
-typedef fptype* (*kernel_t)(blob* &b);
+typedef int* (*kernel_t)(blob* &b);
 
 vc::version_ptr_t dynamicCompile() {                                             
   const std::string kernel_dir = PATH_TO_KERNEL;
@@ -166,6 +167,7 @@ int main(int argc, char **argv){
 
   int totalCount = 0;
   int outputAggreg[6] = {0};
+
   /*
    * DYNAMIC COMPILATION
    */
@@ -178,80 +180,63 @@ int main(int argc, char **argv){
     exit(0);
   }
   std::cerr << "...Done" << std::endl;
-
-
- 	for(i = 0 ; i < (n * 6 * 3); i += 6 * 3)
-	{
-
-		int output = -1;
-
-#pragma parrot(input, "jmeint", [18]dataIn)
-
-		float* V0 = xyz + i + 0 * 3;
-        float* V1 = xyz + i + 1 * 3;
-        float* V2 = xyz + i + 2 * 3;
-		float* U0 = xyz + i + 3 * 3;
-        float* U1 = xyz + i + 4 * 3;
-        float* U2 = xyz + i + 5 * 3; 
-		
-  std::cerr << "...Done" << std::endl;
-
+  std::cerr << "Execution of Kernel" << std::endl;
   /*
    * EXECUTION OF KERNEL
    */
 
-  std::cerr << "Execution of Kernel" << std::endl;
+ 	for(i = 0 ; i < (n * 6 * 3); i += 6 * 3)
+	{
+
+		int* output = new int;
+    *output = -1;
+
+#pragma parrot(input, "jmeint", [18]dataIn)
+
+  float* V0 = xyz + i + 0 * 3;
+  float* V1 = xyz + i + 1 * 3;
+  float* V2 = xyz + i + 2 * 3;
+  float* U0 = xyz + i + 3 * 3;
+  float* U1 = xyz + i + 4 * 3;
+  float* U2 = xyz + i + 5 * 3;
+
+
   blob* b = (blob *) malloc(sizeof(blob));
 
-  b->otype = otype;
-  b->sptprice = sptprice;
-  b->strike = strike;
-  b->rate = rate;
-  b->volatility = volatility;
-  b->otime = otime;
-
-  prices = f(b);
+  b->V0 = V0;
+  b->V1 = V1;
+  b->V2 = V2;
+  b->U0 = U0;
+  b->U1 = U1;
+  b->U2 = U2;
+  b->output = output;
+  x = *f(b);
 //		x = tri_tri_intersect(
 //				xyz + i + 0 * 3, xyz + i + 1 * 3, xyz + i + 2 * 3,
 //				xyz + i + 3 * 3, xyz + i + 4 * 3, xyz + i + 5 * 3,
 //				res, &output);
-  std::cerr << "...Done" << std::endl;
 
   /*
    * WRITE OUTPUT DATA
    */
 
-  std::cerr << "Write Output" << std::endl;
-    file = fopen(outputFile, "w");
-    if(file == NULL) {
-      printf("ERROR: Unable to open file `%s'.\n", outputFile);
-      exit(1);
-    }
-    //rv = fprintf(file, "%i\n", numOptions);
-    if(rv < 0) {
-      printf("ERROR: Unable to write to file `%s'.\n", outputFile);
-      fclose(file);
-      exit(1);
-    }
-    for(i=0; i<numOptions; i++) {
-      rv = fprintf(file, "%.18f\n", prices[i]);
-      if(rv < 0) {
-        printf("ERROR: Unable to write to file `%s'.\n", outputFile);
-        fclose(file);
-        exit(1);
-      }
-    }
-    rv = fclose(file);
-    if(rv != 0) {
-      printf("ERROR: Unable to close file `%s'.\n", outputFile);
-      exit(1);
-    }
+  #pragma parrot(output, "jmeint", [2]<0.2; 0.8>dataOut)
 
-  std::cerr << "...Done" << std::endl;
+    outputAggreg[*output] += 1;
+    PRINT_INSTR("exit type = %d\n", output);
+		outputFileHandler << x << " 0 0 " << *output << std::endl;
+		
+	}
 
-  std::cerr << "Free mem" << std::endl;
-    free(data);
-    free(prices);
+	for (int i=0; i<6; i++)
+	  PRINT_INSTR("exit type %d total = %d\n", i, outputAggreg[i]);
+	
+	outputFileHandler.close();
+	inputFileHandler.close();
+
+	free(xyz);
+	xyz = NULL;
+
   std::cerr << "...Done" << std::endl;
 
 

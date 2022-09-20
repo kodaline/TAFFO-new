@@ -105,12 +105,23 @@ int main(int argc, char* argv[])
 	return 0 ;
 }
 
+#define fptype float
+typedef struct blob_ {
+    fptype *V0;
+    fptype *V1;
+    fptype *V2;
+    fptype *U0;
+    fptype *U1;
+    fptype *U2;
+    int * output;
+} blob;
+
 extern "C"
-fptype* newmain(inputDataStruct* &inputData){
+int* newmain(blob* &inputData){
 
-	x = tri_tri_intersect(
-	xyz + i + 0 * 3, xyz + i + 1 * 3, xyz + i + 2 * 3,
-	xyz + i + 3 * 3, xyz + i + 4 * 3, xyz + i + 5 * 3,
-	&output);
-
+	int* x = new int(tri_tri_intersect(
+	inputData->V0, inputData->V1, inputData->V2,
+	inputData->U0, inputData->U1, inputData->U2,
+	inputData->output));
+	return x;
 }

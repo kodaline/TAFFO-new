@@ -20,7 +20,7 @@ typedef struct OptionData_ {
         fptype DGrefval;
 
 } OptionData;
-
+// the variables are arrays
 typedef struct blob_ {
     fptype *sptprice;
     fptype *strike;
